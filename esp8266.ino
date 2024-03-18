@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
  
-const char* ssid = "YOUR SSID"; // fill in here your router or wifi SSID
-const char* password = "YOUR PASSWORD"; // fill in here your router or wifi password
+const char* ssid = "Heeyun"; // fill in here your router or wifi SSID
+const char* password = "heeyunchang"; // fill in here your router or wifi password
  #define RELAY 0 // relay connected to  GPIO0
 WiFiServer server(80);
  
@@ -34,8 +34,7 @@ void setup()
  
   // Print the IP address
   Serial.print("Use this URL to connect: ");
-  Serial.print("https://192.168.0.178/");
-  Serial.print(WiFi.localIP());
+  Serial.print(WiFi.localIP(172.20.10.6));
   Serial.println("/");
  
 }

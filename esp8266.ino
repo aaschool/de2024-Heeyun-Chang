@@ -1,15 +1,11 @@
-#include <DmxSimple.h>
-
 #define MOTION_SENSOR_PIN D2
-#define DMX_CHANNEL 1 // The DMX channel to control the LED
-#define MOTION_DETECTED_LEVEL HIGH // Level at which motion is detected
+#define LED_PIN D3
 
 bool motionDetected = false;
 
 void setup() {
   pinMode(MOTION_SENSOR_PIN, INPUT);
-  DmxSimple.usePin(3); // Specify the pin used for DMX communication
-  DmxSimple.maxChannel(1); // Set the maximum DMX channel
+  pinMode(LED_PIN, OUTPUT);
   Serial.begin(115200);
 }
 
@@ -17,12 +13,11 @@ void loop() {
   motionDetected = digitalRead(MOTION_SENSOR_PIN);
   
   if (motionDetected) {
-    DmxSimple.write(DMX_CHANNEL, 255); // Turn on the LED at full brightness
+    digitalWrite(LED_PIN, HIGH);
     Serial.println("Motion Detected - LED ON");
+    delay(1000); // Delay to prevent rapid toggling due to sensor's persistence
   } else {
-    DmxSimple.write(DMX_CHANNEL, 0); // Turn off the LED
+    digitalWrite(LED_PIN, LOW);
     Serial.println("No Motion Detected - LED OFF");
   }
-  
-  delay(500); // Adjust delay as needed
 }
